@@ -6,17 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wildberriesweekfive3.databinding.ItemFavoriteCatBinding
+import com.squareup.picasso.Picasso
 
-class LikeCatAdapter: RecyclerView.Adapter<LikeCatAdapter.LikeCatHolder>() {
-    val LikeCatList = ArrayList<FavoriteCatJSON>()
+class LikeCatAdapter : RecyclerView.Adapter<LikeCatAdapter.LikeCatHolder>() {
+    val LikeCatList = ArrayList<CatJSONItem>()
 
     class LikeCatHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = ItemFavoriteCatBinding.bind(item)
 
 
         @SuppressLint("SetTextI18n")
-        fun bind(favoriteCat: FavoriteCatJSON) = with(binding) {
-            tvCatId.text = favoriteCat.image_id
+        fun bind(favoriteCat: CatJSONItem) = with(binding) {
+            Picasso.with(itemView.context)
+                .load(favoriteCat.url)
+                .into(imageCat);
+
+
         }
 
     }
@@ -36,10 +41,9 @@ class LikeCatAdapter: RecyclerView.Adapter<LikeCatAdapter.LikeCatHolder>() {
         return LikeCatList.size
     }
 
-    fun getLikeCatsData(favoriteCats: List<FavoriteCatJSON>) {
+    fun getLikeCatsData(favoriteCats: List<CatJSONItem>) {
         LikeCatList.addAll(favoriteCats)
     }
-
 
 
 }

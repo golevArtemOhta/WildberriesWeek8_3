@@ -8,7 +8,6 @@ import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
-import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,7 +17,9 @@ import kotlinx.serialization.json.Json
 open class CatsViewModel : ViewModel() {
 
     val itemCat = MutableLiveData<List<CatJSONItem>>()
-    val itemFavoriteCatJSON = MutableLiveData<List<FavoriteCatJSON>>()
+    val itemFavoriteCatJSON = MutableLiveData<List<CatJSONItem>>()
+
+    var favoriteList: MutableList<CatJSONItem> = mutableListOf()
     private var job: Job? = null
     val url: String = "https://api.thecatapi.com/v1/images/search?api_key=cc8368e2-0bfa-4af0-a21a-9d20ecdad446"
     val client = HttpClient(CIO) {
@@ -39,25 +40,28 @@ open class CatsViewModel : ViewModel() {
 
     }
 
-    fun like(imageId: String){
-        job?.cancel()
+    fun like(favoriteCat: CatJSONItem){
+        /*job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
             client.post("$url/votes"){
                 contentType(ContentType.Application.Json)
                 setBody(FavoriteCatJSON(image_id = imageId, value = 1))
             }.body()
-        }
+        }*/
+        favoriteList.add(favoriteCat)
+        itemFavoriteCatJSON.value = favoriteList
     }
 
     fun getFavoriteCats(){
-        job?.cancel()
+        /*job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
             val favoriteCats = client.get("$url/votes") {
                 parameter("sub_id", "golev")
                 parameter("value", 1)
             }.body<List<FavoriteCatJSON>>()
             itemFavoriteCatJSON.postValue(favoriteCats)
-        }
+        }*/
+        itemFavoriteCatJSON.value = favoriteList
 
     }
 

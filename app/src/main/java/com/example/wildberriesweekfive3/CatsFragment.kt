@@ -1,18 +1,17 @@
 package com.example.wildberriesweekfive3
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.wildberriesweekfive3.databinding.FragmentCatsBinding
 import com.facebook.drawee.backends.pipeline.Fresco
-
 
 
 class CatsFragment : Fragment() {
@@ -41,11 +40,15 @@ class CatsFragment : Fragment() {
 
         catsViewModel.request()
 
-        with(binding){
+        with(binding) {
             imageButtonLike.setOnClickListener {
-                catsViewModel.like(catItem[0].id.toString())
+                catsViewModel.like(catItem[0])
                 catsViewModel.request()
 
+            }
+
+            imageButtonDisLike.setOnClickListener {
+                Toast.makeText(activity, "Не бывает плохих котиков!", Toast.LENGTH_LONG).show()
             }
 
             buttonOpenFavoriteCats.setOnClickListener {
