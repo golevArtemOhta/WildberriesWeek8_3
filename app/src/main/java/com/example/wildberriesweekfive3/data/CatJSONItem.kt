@@ -1,4 +1,4 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.data
 
 import kotlinx.serialization.Serializable
 

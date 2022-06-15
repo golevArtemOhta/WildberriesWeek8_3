@@ -1,4 +1,4 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,12 +11,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wildberriesweekfive3.databinding.FragmentLikeCatsBinding
+import com.example.wildberriesweekfive3.db.repository.CatDBRepository
+import com.example.wildberriesweekfive3.db.CatDateBase
+import com.example.wildberriesweekfive3.db.CatModelLikeDB
+import com.example.wildberriesweekfive3.db.CatViewModelFactrory
 
 
 class LikeCatsFragment : Fragment() {
     lateinit var binding: FragmentLikeCatsBinding
     lateinit var catsViewModel: CatsViewModel
-    lateinit var catFavoriteItem: List<CatJSONItem>
+    lateinit var catFavoriteItem: List<CatModelLikeDB>
     private val adapter = LikeCatAdapter()
 
 
@@ -29,15 +33,15 @@ class LikeCatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        catsViewModel = ViewModelProvider(requireActivity()).get(CatsViewModel::class.java)
+        val dao = CatDateBase.getDatabase(requireActivity().applicationContext).catDao()
+        val roomRepository = CatDBRepository(dao)
+        val viewModelFactory = CatViewModelFactrory(roomRepository)
+        catsViewModel = ViewModelProvider(this, viewModelFactory)[CatsViewModel::class.java]
         binding = FragmentLikeCatsBinding.inflate(inflater)
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        catsViewModel.getFavoriteCats()
-    }
+
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onStart() {

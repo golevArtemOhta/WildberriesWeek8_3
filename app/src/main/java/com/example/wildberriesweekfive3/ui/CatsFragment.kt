@@ -1,4 +1,4 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.wildberriesweekfive3.*
+import com.example.wildberriesweekfive3.data.CatJSONItem
 import com.example.wildberriesweekfive3.databinding.FragmentCatsBinding
+import com.example.wildberriesweekfive3.db.repository.CatDBRepository
+import com.example.wildberriesweekfive3.db.CatDateBase
+import com.example.wildberriesweekfive3.db.CatViewModelFactrory
 import com.facebook.drawee.backends.pipeline.Fresco
 
 
@@ -18,17 +23,20 @@ class CatsFragment : Fragment() {
     lateinit var binding: FragmentCatsBinding
     lateinit var catsViewModel: CatsViewModel
     lateinit var catItem: List<CatJSONItem>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        catsViewModel = ViewModelProvider(requireActivity()).get(CatsViewModel::class.java)
+        val dao = CatDateBase.getDatabase(requireActivity().applicationContext).catDao()
+        val roomRepository = CatDBRepository(dao)
+        val viewModelFactory = CatViewModelFactrory(roomRepository)
+        catsViewModel = ViewModelProvider(this, viewModelFactory)[CatsViewModel::class.java]
         binding = FragmentCatsBinding.inflate(inflater)
         return binding.root
 

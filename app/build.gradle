@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlinx-serialization'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -70,5 +71,12 @@ dependencies {
     implementation "io.ktor:ktor-client-logging-jvm:2.0.2"
     implementation("io.ktor:ktor-client-logging:2.0.2")
 
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation("androidx.room:room-runtime:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+    testImplementation("androidx.room:room-testing:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
+
+// optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.4.2")
 }

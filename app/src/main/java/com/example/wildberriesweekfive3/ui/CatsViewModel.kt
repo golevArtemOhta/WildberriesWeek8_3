@@ -1,8 +1,12 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.wildberriesweekfive3.data.CatJSONItem
+import com.example.wildberriesweekfive3.db.repository.CatDBRepository
+import com.example.wildberriesweekfive3.db.CatModelLikeDB
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -14,10 +18,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-open class CatsViewModel : ViewModel() {
+
+open class CatsViewModel(private val catDBRepository: CatDBRepository) : ViewModel() {
+
 
     val itemCat = MutableLiveData<List<CatJSONItem>>()
-    val itemFavoriteCatJSON = MutableLiveData<List<CatJSONItem>>()
+    val itemFavoriteCatJSON: LiveData<List<CatModelLikeDB>> = catDBRepository.catsLike
 
     var favoriteList: MutableList<CatJSONItem> = mutableListOf()
     private var job: Job? = null
@@ -33,7 +39,6 @@ open class CatsViewModel : ViewModel() {
     fun request() {
         job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
-
             val cat= client.get(url).body<List<CatJSONItem>>()
             itemCat.postValue(cat)
         }
@@ -41,28 +46,11 @@ open class CatsViewModel : ViewModel() {
     }
 
     fun like(favoriteCat: CatJSONItem){
-        /*job?.cancel()
-        job = viewModelScope.launch(Dispatchers.IO) {
-            client.post("$url/votes"){
-                contentType(ContentType.Application.Json)
-                setBody(FavoriteCatJSON(image_id = imageId, value = 1))
-            }.body()
-        }*/
-        favoriteList.add(favoriteCat)
-        itemFavoriteCatJSON.value = favoriteList
+        viewModelScope.launch {
+            catDBRepository.insert(CatModelLikeDB(favoriteCat.id, favoriteCat.url))
+        }
     }
 
-    fun getFavoriteCats(){
-        /*job?.cancel()
-        job = viewModelScope.launch(Dispatchers.IO) {
-            val favoriteCats = client.get("$url/votes") {
-                parameter("sub_id", "golev")
-                parameter("value", 1)
-            }.body<List<FavoriteCatJSON>>()
-            itemFavoriteCatJSON.postValue(favoriteCats)
-        }*/
-        itemFavoriteCatJSON.value = favoriteList
-
-    }
 
 }
+

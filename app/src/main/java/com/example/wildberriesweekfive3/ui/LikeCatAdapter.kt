@@ -1,27 +1,28 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wildberriesweekfive3.R
 import com.example.wildberriesweekfive3.databinding.ItemFavoriteCatBinding
-import com.squareup.picasso.Picasso
+import com.example.wildberriesweekfive3.db.CatModelLikeDB
+import com.facebook.drawee.backends.pipeline.Fresco
 
 class LikeCatAdapter : RecyclerView.Adapter<LikeCatAdapter.LikeCatHolder>() {
-    val LikeCatList = ArrayList<CatJSONItem>()
+    val LikeCatList = ArrayList<CatModelLikeDB>()
 
     class LikeCatHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = ItemFavoriteCatBinding.bind(item)
 
 
         @SuppressLint("SetTextI18n")
-        fun bind(favoriteCat: CatJSONItem) = with(binding) {
-            Picasso.with(itemView.context)
-                .load(favoriteCat.url)
-                .into(imageCat);
-
-
+        fun bind(favoriteCat: CatModelLikeDB) = with(binding) {
+            val controller = Fresco.newDraweeControllerBuilder()
+                .setUri(favoriteCat.url)
+                .build()
+            binding.imageCat.controller = controller
         }
 
     }
@@ -41,7 +42,7 @@ class LikeCatAdapter : RecyclerView.Adapter<LikeCatAdapter.LikeCatHolder>() {
         return LikeCatList.size
     }
 
-    fun getLikeCatsData(favoriteCats: List<CatJSONItem>) {
+    fun getLikeCatsData(favoriteCats: List<CatModelLikeDB>) {
         LikeCatList.addAll(favoriteCats)
     }
 

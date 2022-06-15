@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CatsFragment">
+    tools:context=".ui.CatsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,8 +15,8 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Like"
             android:drawableRight="@drawable/ic_baseline_thumb_up_24"
+            android:text="Like"
             app:layout_constraintEnd_toStartOf="@+id/imageButtonDisLike"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,18 +38,17 @@
             android:id="@+id/imageViewCat"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonOpenFavoriteCats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Open Favorite cats"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

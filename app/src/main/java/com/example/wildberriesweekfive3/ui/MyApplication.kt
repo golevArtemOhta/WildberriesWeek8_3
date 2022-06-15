@@ -1,4 +1,4 @@
-package com.example.wildberriesweekfive3
+package com.example.wildberriesweekfive3.ui
 
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
