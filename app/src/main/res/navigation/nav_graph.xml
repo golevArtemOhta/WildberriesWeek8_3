@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/catsFragment">
+
+    <fragment
+        android:id="@+id/catsFragment"
+        android:name="com.example.wildberriesweekfive3.ui.CatsFragment"
+        android:label="fragment_cats"
+        tools:layout="@layout/fragment_cats" >
+        <action
+            android:id="@+id/action_catsFragment_to_infoFragment22"
+            app:destination="@id/infoFragment2" />
+        <action
+            android:id="@+id/action_catsFragment_to_likeCatsFragment"
+            app:destination="@id/likeCatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likeCatsFragment"
+        android:name="com.example.wildberriesweekfive3.ui.LikeCatsFragment"
+        android:label="fragment_like_cats"
+        tools:layout="@layout/fragment_like_cats" >
+        <action
+            android:id="@+id/action_likeCatsFragment_to_infoFragment22"
+            app:destination="@id/infoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment2"
+        android:name="com.example.wildberriesweekfive3.ui.InfoFragment"
+        android:label="InfoFragment" />
+</navigation>

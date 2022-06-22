@@ -22,8 +22,13 @@ import kotlinx.serialization.json.Json
 open class CatsViewModel(private val catDBRepository: CatDBRepository) : ViewModel() {
 
 
-    val itemCat = MutableLiveData<List<CatJSONItem>>()
+    val itemCat: MutableLiveData<List<CatJSONItem>> by lazy {
+        MutableLiveData<List<CatJSONItem>>().also {
+            request()
+        }
+    }
     val itemFavoriteCatJSON: LiveData<List<CatModelLikeDB>> = catDBRepository.catsLike
+
 
     var favoriteList: MutableList<CatJSONItem> = mutableListOf()
     private var job: Job? = null

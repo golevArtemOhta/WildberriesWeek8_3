@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.wildberriesweekfive3.*
 import com.example.wildberriesweekfive3.data.CatJSONItem
 import com.example.wildberriesweekfive3.databinding.FragmentCatsBinding
@@ -23,6 +26,9 @@ class CatsFragment : Fragment() {
     lateinit var binding: FragmentCatsBinding
     lateinit var catsViewModel: CatsViewModel
     lateinit var catItem: List<CatJSONItem>
+
+    lateinit var navHostFragment: NavHostFragment
+    lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +51,10 @@ class CatsFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        catsViewModel.request()
-
         with(binding) {
             imageButtonLike.setOnClickListener {
                 catsViewModel.like(catItem[0])
                 catsViewModel.request()
-
             }
 
             imageButtonDisLike.setOnClickListener {
@@ -60,7 +62,7 @@ class CatsFragment : Fragment() {
             }
 
             buttonOpenFavoriteCats.setOnClickListener {
-                openFragment()
+                it.findNavController().navigate(R.id.likeCatsFragment)
             }
         }
 

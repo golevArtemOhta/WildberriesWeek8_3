@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1125" />
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/layout/fragment_cats.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/layout/fragment_info.xml" value="0.1" />
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/layout/item_favorite_cat.xml" value="0.1" />
+        <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeek8_3/app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeekFive3-master/app/src/main/res/layout/fragment_cats.xml" value="0.1" />
         <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeekFive3-master/app/src/main/res/layout/item_favorite_cat.xml" value="0.19157608695652173" />
         <entry key="..\:/Users/79992/AndroidStudioProjects/AndroidUI2/WildberriesWeekFive3/app/src/main/res/layout/activity_main.xml" value="0.12318840579710146" />
