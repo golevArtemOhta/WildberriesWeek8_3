@@ -12,9 +12,10 @@ import android.net.Uri
 
 class InfoFragment : Fragment() {
     lateinit var binding: FragmentInfoBinding
-    val uri: Uri = Uri.parse("https://github.com/golevArtemOhta") // missing 'http://' will cause crashed
 
+    val uri: Uri = Uri.parse("https://github.com/golevArtemOhta")
     val intent = Intent(Intent.ACTION_VIEW, uri)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
